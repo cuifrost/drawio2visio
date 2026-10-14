@@ -2,6 +2,8 @@
 
 给 AI / 自动化：**最少步骤**完成 Draw.io → Visio。
 
+只有截图时，先阅读 [截图重绘工作流](screenshot-to-visio.md)，把截图、补充文字和 [可复制的 Agent 提示词](../prompts/screenshot-to-drawio.zh-CN.txt) 一起提供给支持看图的 Agent。它负责生成 `.drawio`；本项目再负责转换。用户也可以直接在 Draw.io 绘制。
+
 ## 职责划分
 
 | 角色 | 做什么 |
@@ -76,7 +78,7 @@ python3 scripts/compare_vsdx.py <手绘.vsdx> OUTPUT_BASE.vsdx
 node scripts/convert.js \
   examples/review-flow.drawio -o outputs/review --json --set processWidth=2.2
 
-python3 scripts/check_vsdx.py outputs/我的图.vsdx
+python3 scripts/check_vsdx.py outputs/review.vsdx
 ```
 
 失败时：先看 check_vsdx 输出，再读 `docs/compatibility.md`。
@@ -96,3 +98,9 @@ Python 包装器也支持 `--strict`、`--report-only`、`--profile`、`--page`�
 ## 绘制侧约定
 
 输入规则见 `docs/compatibility.md`（标准 mxfile；起止 ellipse / 流程矩形 / 判定 rhombus）。
+
+## 交付后的 Visio 整理
+
+在交付说明里提醒用户：如果首次打开生成的 `.vsdx` 时连线显示凌乱，可以全选画布上的内容，轻微拖动并松开，以触发 Visio 重新计算；随后通过对齐及横向/纵向间距整理版面。分支或循环较多时，可按主干与侧支分别整理。
+
+这是维护者的使用经验，不应在未打开目标 Visio 实测时写成“所有线路已整齐排布”。需要保留的文字、方向和连线关系仍须核对。详细操作见 [工作流指南](screenshot-to-visio.md)。

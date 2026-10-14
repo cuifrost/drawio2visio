@@ -2,7 +2,7 @@
 
 把 Draw.io 流程图交付成可继续编辑、尺寸一致、转换过程可检查的 Visio 文档。
 
-[English](README.en.md) · [兼容性说明](docs/compatibility.md) · [方案对比](docs/project-positioning.md) · [自动化调用](docs/ai-agent-guide.md)
+[English](README.en.md) · [截图重绘与 Agent 提示词](docs/screenshot-to-visio.md) · [兼容性说明](docs/compatibility.md) · [自动化调用](docs/ai-agent-guide.md)
 
 ![Drawio2Visio：本地输入、标准化、可编辑输出与检查报告](docs/assets/overview.svg)
 
@@ -15,6 +15,8 @@
 这个小工具来自一个实际的科研交付场景：起稿时可以用 Draw.io、脚本或 AI 辅助生成流程图，但接收方仍希望拿到 Visio 文件，继续调整文字、节点和连接线。重新在 Visio 中逐个拖流程块、对齐和修改格式，会消耗很多重复劳动。
 
 Drawio2Visio 希望简化这一步：**在 Draw.io 中起稿，把结构转换成可编辑的 Visio，再做必要的人工检查和微调。** 它适合需要向导师、合作者或使用 Visio 的团队交付流程图的人。
+
+Draw.io 本身就适合直接绘制流程图，起稿阶段可以把结构和布局画好。如果手头只有流程图截图，也可以把**截图、补充文字说明和 [Agent 提示词](prompts/screenshot-to-drawio.zh-CN.txt)** 一起交给支持看图的 Agent，让它生成规范的 `.drawio` 文件，再使用本项目转换。
 
 选择什么绘图工具取决于协作方式和最终交付格式。Jupyter Notebook、代码绘图、Draw.io 和 Visio 可以分别用于不同环节；当接收方明确需要可编辑 Visio 时，这个转换步骤才有价值。
 
@@ -44,6 +46,15 @@ Drawio2Visio 希望简化这一步：**在 Draw.io 中起稿，把结构转换�
 | 团队反复转换不同图，参数难以复用 | 网页预设、CLI profile 和 JSON 结果共用核心 |
 
 本项目的特点是把**流程图标准化、原生连接约束、逐项检查和本地操作**放在同一条交付路径里。其他工具也可能支持其中的能力；这里不宣称“唯一”或“全格式无损转换”。
+
+## 推荐工作流
+
+1. **直接在 Draw.io 绘制**；已有截图时，让 Agent 结合截图和补充文字生成明文 `.drawio`。先在 Draw.io 中确认文字、判断分支和连线方向。
+2. **用本项目转换**，选择统一尺寸或保留源尺寸，查看检查报告，得到可编辑的 `.vsdx`。
+3. **在 Visio 中触发一次重算**：首次打开 `.vsdx` 时，部分连线可能交叉或显示凌乱。可以在绘图页中按 `Ctrl+A` 全选，将选中内容轻轻拖动一小段距离后松开，让 Visio 更新连接关系和线路。这是维护者的实际使用经验；复杂回路仍需检查。
+4. **调整横纵间距**：选中需要整理的节点，在 Visio 的“开始 → 位置/排列”中使用自动对齐与间距，或在“间距选项”里设置横向、纵向距离。多列或有分支的图可先按主干、侧支分别选中整理，再检查箭头和标签。
+
+这样通常只需整体触发重算、统一间距和少量微调，能减少逐个拖框与重接线的工作。详见 [截图重绘与 Visio 整理指南](docs/screenshot-to-visio.md)。间距操作也可参考 [Microsoft 官方说明](https://support.microsoft.com/en-us/visio/video-align-and-position-shapes)。
 
 ## 快速开始
 

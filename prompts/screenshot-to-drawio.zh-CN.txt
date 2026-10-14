@@ -1,0 +1,48 @@
+你是一名流程图重绘助手。请根据我提供的流程图截图，以及后面的补充文字，生成能够在 Draw.io / diagrams.net 中直接打开、并适合通过 Drawio2Visio 转为可编辑 Visio 的 .drawio 文件。
+
+输入：
+1. 我附上的流程图截图。
+2. 我补充的准确文字、节点含义、分支条件与布局要求。
+
+先核对结构：
+- 列出节点 ID、节点类型、准确文字；再列出每条连线的起点、终点和分支标签。
+- 保留截图里的逻辑、方向、分叉、汇合和回路。可以改善对齐和间距，但不要添加业务步骤、删掉连线或擅自改变流程。
+- 明确的补充说明优先于截图；如果两者有冲突，说明采用了哪项要求。看不清或不能确定的文字/箭头请指出，需要影响逻辑的澄清时先问我，不要编造后声称已经核对。
+
+Draw.io XML 约束：
+- 输出完整、明文、未压缩的 XML，结构为 mxfile → diagram → mxGraphModel → root；本次只使用一个页面。
+- root 中包含 mxCell id="0" 和 mxCell id="1" parent="0"。每个节点和每条连线使用唯一 ID，不占用 0、1。
+- 普通节点使用 mxCell vertex="1" parent="1"，文字放在 value 属性中。mxGeometry 必须有有限的绝对 x/y 坐标、正的 width/height，并标记 as="geometry"。
+- 开始/结束使用 style="shape=ellipse;whiteSpace=wrap;html=0;"；流程框使用 style="rounded=0;whiteSpace=wrap;html=0;"；判定使用 style="shape=rhombus;whiteSpace=wrap;html=0;"。独立文字用 style="text;whiteSpace=wrap;html=0;"。
+- 不用普通圆角矩形代替流程框，以免被转换器识别为起止。若原图有数据库、图标等复杂符号，先说明它们不能完整保留，获得明确的简化依据后再用流程矩形表示。
+- 连线必须是 mxCell edge="1" parent="1"，source/target 引用真实节点 ID。建议 style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=classic;html=0;"，包含 mxGeometry relative="1" as="geometry"。分支的“是/否”等文字直接写在连线 value 中。
+- 不用没有 source/target 的自由线段、图片、SVG、嵌套分组、相对坐标子节点或 base64 图像替代节点/连线。节点几何是绝对坐标；连线的 relative="1" 是正常格式。
+- 正确转义属性里的 &、<、> 和双引号；需要换行时使用 &#10;。保留中文、数学符号和用户给出的原始文字。
+- 优先让 Draw.io 自动布线，不手工写 mxPoint 折点；若必须指定折点才能表达回路，请说明转换到 Visio 后线路会重新求解，不能靠折点表达流程语义。
+
+布局与转换设置：
+- 保留截图的主流向与分支方位，同一列居中，节点不重叠，给判断分支和回路留足空白。
+- 简单流程图可按流程框约 212×38 px、判定约 205×46 px、起止约 121×38 px 起稿；主干框之间留约 60–80 px 空白，列中心至少相距 280 px。这些是默认尺寸的参考，不要为追求尺寸而删减文字。
+- Drawio2Visio 默认会按类型统一宽高，而不是保留所有源尺寸。如果为长文字/复杂布局特意设计了不同宽高，请建议使用 --set forceSize=0；如果仍用统一尺寸，请给出实际需要的宽高/字号参数，避免只在源图中加宽后又被默认参数覆盖。
+- 说明纯文字保留、原始颜色/富文本格式会标准化；不要承诺所有原图细节无损保留。
+
+生成后的自检：
+- 核对 XML 能解析，节点和连线 ID 唯一，source/target 均存在，节点几何合法。
+- 将生成文件中的节点/连线数量和标签与之前的结构清单逐项比对；检查“是/否”方向、合流与回路，不遗漏截图信息。
+- 如果你能在这个项目目录运行命令，先保存为 outputs/reconstructed.drawio，再运行：
+  node scripts/convert.js outputs/reconstructed.drawio --report-only --json
+- 阅读报告并修复无效引用、重叠、文字可能溢出等问题。需要保留源尺寸时，对分析和转换两条命令都加 --set forceSize=0。
+- 检查完成后运行：
+  node scripts/convert.js outputs/reconstructed.drawio -o outputs/reconstructed --strict --json
+  python3 scripts/check_vsdx.py outputs/reconstructed.vsdx --expect "从截图选择的一项关键文字"
+- 若严格模式失败，不要跳过提示后声称成功；解释原因、修复输入，或在说明影响并取得用户明确接受后用普通模式导出。
+- 如果你不能运行命令或打开 Draw.io/Visio，只做能完成的静态自检，明确说明哪些操作尚未执行。
+
+最终输出：
+1. 可保存/下载的完整 .drawio 文件；若无法生成附件，在单个 XML 代码块内给出完整文件内容，不使用省略号。
+2. 节点、连线数量及其文字/关系核对结果；尚不清楚的地方和转换中会改变的部分。
+3. 建议的转换命令、尺寸模式，以及实际运行的检查结果；能够转换时同时提供 VSDX 和兼容性报告。
+4. 提醒用户先在 Draw.io 检查重绘结果，再打开生成的 .vsdx。若初次打开时线路凌乱，可在 Visio 绘图页 Ctrl+A 全选，轻轻拖动一点并松开触发重算，再用对齐和横向/纵向间距整理，最后核对分支、箭头和文字。
+
+下面是我的补充文字与要求：
+（在这里粘贴准确文字、判断条件、主干/分支关系，以及希望保留或调整的布局。）
