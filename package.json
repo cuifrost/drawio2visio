@@ -15,7 +15,7 @@
     "@xmldom/xmldom": "^0.9.8"
   },
   "scripts": {
-    "test": "node --test tests && python3 -m unittest discover -s tests -v",
+    "test": "node --test tests/converter.test.js && python3 -m unittest discover -s tests -v",
     "convert": "node scripts/convert.js",
     "convert:ai": "python3 scripts/ai_convert.py",
     "check": "python3 scripts/check_vsdx.py",
