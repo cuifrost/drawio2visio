@@ -1,0 +1,7 @@
+<mxfile><diagram name="兼容性检查"><mxGraphModel><root>
+  <mxCell id="0"/><mxCell id="1" parent="0"/>
+  <mxCell id="process" value="读取数据" vertex="1" parent="1"><mxGeometry x="160" y="40" width="210" height="60" as="geometry"/></mxCell>
+  <mxCell id="database" value="存储记录" style="shape=cylinder" vertex="1" parent="1"><mxGeometry x="160" y="200" width="210" height="80" as="geometry"/></mxCell>
+  <mxCell id="good-edge" source="process" target="database" edge="1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+  <mxCell id="missing-endpoint" source="database" target="missing-node" edge="1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+</root></mxGraphModel></diagram></mxfile>

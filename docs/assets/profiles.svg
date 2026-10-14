@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1410" height="820" viewBox="0 0 1410 820" role="img" aria-label="Drawio2Visio documentation figure"><rect width="100%" height="100%" rx="20" fill="#F3F6FB"/><g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif"><text x="40" y="58" font-size="30" fill="#142238" font-weight="700">One flowchart, two delivery profiles</text><text x="40" y="91" font-size="16" fill="#60728A" font-weight="400">Generated from examples/review-flow.drawio. SVG previews, not Microsoft Visio screenshots.</text><rect x="32" y="122" width="430" height="616" rx="12" fill="#fff" stroke="#D5DFEC"/><text x="54" y="160" font-size="23" fill="#142238" font-weight="700">Source layout</text><text x="54" y="190" font-size="15" fill="#60728A" font-weight="400">Mixed widths, heights and font sizes</text><svg xmlns="http://www.w3.org/2000/svg" viewBox="230 -10 800 864" width="398" height="482" x="48" y="214"><defs><marker id="source-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#60728A"/></marker></defs><line x1="420" y1="74" x2="420" y2="130" stroke="#60728A" marker-end="url(#source-arrow)"/><line x1="420" y1="182" x2="420" y2="250" stroke="#60728A" marker-end="url(#source-arrow)"/><line x1="420" y1="318" x2="420" y2="400" stroke="#60728A" marker-end="url(#source-arrow)"/><line x1="540" y1="450" x2="720" y2="450" stroke="#60728A" marker-end="url(#source-arrow)"/><text x="638" y="443" font-size="14" fill="#60728A" font-weight="400">否 / No</text><line x1="420" y1="500" x2="420" y2="600" stroke="#60728A" marker-end="url(#source-arrow)"/><text x="428" y="543" font-size="14" fill="#60728A" font-weight="400">是 / Yes</text><line x1="420" y1="644" x2="420" y2="760" stroke="#60728A" marker-end="url(#source-arrow)"/><rect x="330" y="30" width="180" height="44" rx="22" fill="#D7F1E5" stroke="#1F7652" stroke-width="1.5"/><text x="420" y="57" text-anchor="middle" font-size="16" fill="#142238">开始 / Start</text><rect x="280" y="130" width="280" height="52" rx="0" fill="#DFEAFE" stroke="#2758A5" stroke-width="1.5"/><text x="420" y="161" text-anchor="middle" font-size="14" fill="#142238">接收申请 / Receive</text><rect x="310" y="250" width="220" height="68" rx="0" fill="#DFEAFE" stroke="#2758A5" stroke-width="1.5"/><text x="420" y="289" text-anchor="middle" font-size="18" fill="#142238">检查材料 / Check</text><polygon points="420,400 540,450 420,500 300,450" fill="#EDE5FA" stroke="#7450A0" stroke-width="1.5"/><text x="420" y="455" text-anchor="middle" font-size="14" fill="#142238">完整？ / Complete?</text><rect x="720" y="424" width="270" height="52" rx="0" fill="#FBE8CC" stroke="#91621F" stroke-width="1.5"/><text x="855" y="455" text-anchor="middle" font-size="16" fill="#142238">补充材料 / Revise</text><rect x="270" y="600" width="300" height="44" rx="0" fill="#DFEAFE" stroke="#2758A5" stroke-width="1.5"/><text x="420" y="627" text-anchor="middle" font-size="15" fill="#142238">提交审核 / Review</text><rect x="320" y="760" width="200" height="54" rx="27" fill="#D7F1E5" stroke="#1F7652" stroke-width="1.5"/><text x="420" y="792" text-anchor="middle" font-size="18" fill="#142238">结束 / End</text></svg><rect x="490" y="122" width="430" height="616" rx="12" fill="#fff" stroke="#D5DFEC"/><text x="512" y="160" font-size="23" fill="#142238" font-weight="700">beauty · 8 pt</text><text x="512" y="190" font-size="15" fill="#60728A" font-weight="400">Process: 55.9 × 10.0 mm</text><svg xmlns="http://www.w3.org/2000/svg" width="398" height="482" viewBox="0 0 742.2048 868.8191999999999" x="506" y="214">
+<rect width="100%" height="100%" fill="#fff"/>
+<defs><marker id="beauty-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#111"/></marker></defs>
+<line x1="153.60000000000002" y1="85.82399999999993" x2="153.60000000000002" y2="151.99679999999987" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<line x1="153.60000000000002" y1="189.82079999999988" x2="153.60000000000002" y2="279.99359999999996" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<line x1="153.60000000000002" y1="317.8175999999999" x2="153.60000000000002" y2="442.34879999999987" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<line x1="255.84000000000003" y1="464.90879999999987" x2="483.00479999999993" y2="464.90879999999987" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<rect x="333.4224" y="458.5087999999999" width="72" height="12.799999999999999" fill="#fff"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="369.4224" y="468.6421333333332">否 / No</tspan>
+</text>
+<line x1="153.60000000000002" y1="487.4687999999999" x2="153.60000000000002" y2="617.9999999999998" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<rect x="112.2666666666667" y="546.3343999999998" width="82.66666666666666" height="12.799999999999999" fill="#fff"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="556.4677333333332">是 / Yes</tspan>
+</text>
+<line x1="153.60000000000002" y1="655.8239999999998" x2="153.60000000000002" y2="782.9951999999997" stroke="#111" stroke-width="0.667" marker-end="url(#beauty-arrow)"/>
+<rect x="93.12000000000002" y="47.99999999999992" width="120.96000000000001" height="37.824" rx="18.912" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="70.64533333333326">开始 / Start</tspan>
+</text>
+<rect x="48.000000000000014" y="151.99679999999987" width="211.20000000000002" height="37.824" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="174.6421333333332">接收申请 / Receive</tspan>
+</text>
+<rect x="48.000000000000014" y="279.99359999999996" width="211.20000000000002" height="37.824" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="302.6389333333333">检查材料 / Check</tspan>
+</text>
+<polygon points="153.60000000000002,442.34879999999987 255.84000000000003,464.90879999999987 153.60000000000002,487.4687999999999 51.36000000000003,464.90879999999987" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="468.6421333333332">完整？ / Complete?</tspan>
+</text>
+<rect x="483.00479999999993" y="445.9967999999999" width="211.20000000000002" height="37.824" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="588.6048" y="468.6421333333332">补充材料 / Revise</tspan>
+</text>
+<rect x="48.000000000000014" y="617.9999999999998" width="211.20000000000002" height="37.824" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="640.6453333333332">提交审核 / Review</tspan>
+</text>
+<rect x="93.12000000000002" y="782.9951999999997" width="120.96000000000001" height="37.824" rx="18.912" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10.666666666666666" fill="#111">
+<tspan x="153.60000000000002" y="805.6405333333331">结束 / End</tspan>
+</text>
+</svg><rect x="948" y="122" width="430" height="616" rx="12" fill="#fff" stroke="#D5DFEC"/><text x="970" y="160" font-size="23" fill="#142238" font-weight="700">compact · 7.5 pt</text><text x="970" y="190" font-size="15" fill="#60728A" font-weight="400">Process: 47.0 × 8.9 mm</text><svg xmlns="http://www.w3.org/2000/svg" width="398" height="482" viewBox="0 0 708.6048000000001 864.5952" x="964" y="214">
+<rect width="100%" height="100%" fill="#fff"/>
+<defs><marker id="compact-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0 0L6 3L0 6Z" fill="#111"/></marker></defs>
+<line x1="136.79999999999998" y1="81.60000000000007" x2="136.79999999999998" y2="151.9968" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<line x1="136.79999999999998" y1="185.59680000000003" x2="136.79999999999998" y2="279.99359999999996" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<line x1="136.79999999999998" y1="313.5936" x2="136.79999999999998" y2="442.6368" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<line x1="225.6" y1="462.7968" x2="483.0048" y2="462.7968" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<rect x="320.3024" y="456.7968" width="68" height="12" fill="#fff"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="354.3024" y="466.2968">否 / No</tspan>
+</text>
+<line x1="136.79999999999998" y1="482.95680000000004" x2="136.79999999999998" y2="618" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<rect x="97.79999999999998" y="544.4784" width="78" height="12" fill="#fff"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="553.9784">是 / Yes</tspan>
+</text>
+<line x1="136.79999999999998" y1="651.5999999999999" x2="136.79999999999998" y2="782.9952" stroke="#111" stroke-width="0.667" marker-end="url(#compact-arrow)"/>
+<rect x="86.39999999999998" y="48.00000000000007" width="100.80000000000001" height="33.599999999999994" rx="16.799999999999997" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="68.30000000000007">开始 / Start</tspan>
+</text>
+<rect x="47.99999999999997" y="151.9968" width="177.60000000000002" height="33.599999999999994" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="172.29680000000002">接收申请 / Receive</tspan>
+</text>
+<rect x="47.99999999999997" y="279.99359999999996" width="177.60000000000002" height="33.599999999999994" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="300.29359999999997">检查材料 / Check</tspan>
+</text>
+<polygon points="136.79999999999998,442.6368 225.6,462.7968 136.79999999999998,482.95680000000004 47.99999999999997,462.7968" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="466.2968">完整？ / Complete?</tspan>
+</text>
+<rect x="483.0048" y="445.9968" width="177.60000000000002" height="33.599999999999994" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="571.8048" y="466.2968">补充材料 / Revise</tspan>
+</text>
+<rect x="47.99999999999997" y="618" width="177.60000000000002" height="33.599999999999994" rx="0" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="638.3">提交审核 / Review</tspan>
+</text>
+<rect x="86.39999999999998" y="782.9952" width="100.80000000000001" height="33.599999999999994" rx="16.799999999999997" fill="#fff" stroke="#111" stroke-width="0.667"/>
+<text text-anchor="middle" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="10" fill="#111">
+<tspan x="136.79999999999998" y="803.2951999999999">结束 / End</tspan>
+</text>
+</svg><text x="40" y="780" font-size="17" fill="#60728A" font-weight="400">Node positions and labels stay in the source order; dimensions and type styling follow the selected profile.</text></g></svg>

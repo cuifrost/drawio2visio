@@ -1,0 +1,18 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# 冒烟测试临时产物
+outputs/_smoke*
+
+# Keep working diagrams and generated deliveries local.
+outputs/
+inputs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/

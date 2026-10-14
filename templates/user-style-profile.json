@@ -1,0 +1,203 @@
+{
+  "$schema": "user-visio-style-profile/v1",
+  "id": "generic-flowchart-v1",
+  "label": "通用流程图风格配置",
+  "source_file": "",
+  "extracted_at": "",
+  "author": "",
+  "template_hint": "用户提供的 Visio 模板（可选）",
+  "masters": {
+    "startEnd": {
+      "name": "开始/结束",
+      "nameU": "Start/End",
+      "geometry": "stadium_caps",
+      "description": "胶囊形起止，两端椭圆弧",
+      "default_size_in": {
+        "width": 0.9843,
+        "height": 0.3937
+      },
+      "instance_size_in": {
+        "width": 1.378,
+        "height": 0.3937
+      }
+    },
+    "process": {
+      "name": "流程",
+      "nameU": "Process",
+      "geometry": "rectangle",
+      "description": "直角矩形流程框",
+      "default_size_in": {
+        "width": 0.9843,
+        "height": 0.5906
+      },
+      "instance_size_in": {
+        "width_main": 3.1496,
+        "width_side": 1.5748,
+        "height": 0.3937
+      }
+    },
+    "decision": {
+      "name": "判定",
+      "nameU": "Decision",
+      "geometry": "diamond",
+      "description": "菱形判定框",
+      "default_size_in": {
+        "width": 0.9843,
+        "height": 0.5906
+      },
+      "instance_size_in": {
+        "width": 2.7559,
+        "height": 0.3937
+      }
+    },
+    "connector": {
+      "name": "动态连接线",
+      "nameU": "Dynamic connector",
+      "geometry": "elbow_l",
+      "description": "直角/肘形动态连接线，端点吸附"
+    }
+  },
+  "sizes_inches": {
+    "process_width": 2.2,
+    "process_height": 0.3937,
+    "decision_width": 2.1,
+    "decision_height": 0.3937,
+    "startEnd_width": 1.15,
+    "startEnd_height": 0.3937,
+    "note": "流程框统一一种规格（主列/侧框已合并）。高度统一 0.3937 in = 10 mm；主框宽 3.1496 in = 80 mm。个别差异可在 Visio 中微调。"
+  },
+  "sizes_mm": {
+    "process_height": 10,
+    "process_width_main": 80,
+    "process_width_side": 40,
+    "decision_width": 70,
+    "decision_height": 10,
+    "startEnd_width": 35
+  },
+  "style": {
+    "line": {
+      "color": "#000000",
+      "weight_in": 0.006944,
+      "weight_pt": 0.5,
+      "pattern": 1,
+      "bind": "THEMEGUARD(RGB(0,0,0))"
+    },
+    "fill": {
+      "foregnd": "#FEFFFF",
+      "bind": "THEMEGUARD(THEMEVAL(\"Light\"))",
+      "pattern": 1
+    },
+    "text": {
+      "size_in": 0.111111,
+      "size_pt": 8,
+      "color": "#000000",
+      "font": "Themed",
+      "asian_font": "Themed",
+      "lang_id": "zh-CN",
+      "bind": "主题继承，不写死字体名"
+    },
+    "connector": {
+      "end_arrow": 4,
+      "end_arrow_size": 2,
+      "rounding": 0
+    },
+    "shape_rounding": 0
+  },
+  "theme": {
+    "name": "Office",
+    "scheme_id": 60,
+    "latin_font": "Calibri",
+    "east_asia_font": "KaiTi_GB2312",
+    "colors": {
+      "dk1": "#000000",
+      "lt1": "#FEFFFF",
+      "dk2": "#44546A",
+      "lt2": "#E7E6E6",
+      "accent1": "#156082",
+      "accent2": "#61CBF4",
+      "accent3": "#0B76A0",
+      "accent4": "#96DCF8",
+      "accent5": "#E97132",
+      "accent6": "#4EA72E"
+    },
+    "note": "颜色/字体全部走 THEMEVAL / THEMEGUARD，保证换主题可全局联动"
+  },
+  "layout": {
+    "page": {
+      "size": "A3",
+      "width_mm": 297,
+      "height_mm": 420,
+      "orientation": "portrait"
+    },
+    "direction": "top_to_bottom",
+    "main_column_x_in": 3.1,
+    "vertical_gap_in": 0.7087,
+    "vertical_gap_mm": 18,
+    "branch_policy": {
+      "model_retrain": "right_side",
+      "safety_override": "right_side",
+      "sail_yes": "left_side",
+      "sail_no": "right_side"
+    },
+    "align": "center_column",
+    "text_wrap": true
+  },
+  "habits_summary": [
+    "单一主列自上而下，垂直间距恒定 18mm",
+    "流程/判定高度锁死 10mm，宽度按内容 80mm（主）/ 40mm（侧）",
+    "起止用胶囊，流程直角矩形，判定菱形",
+    "连接线一律动态连接线 + 三角箭头(4/2)",
+    "黑白极简 + 主题填充，不内联写死颜色字体",
+    "分支节点甩到主列左右侧，主干保持笔直",
+    "字号统一 8pt 中文，页面 A3 竖版"
+  ],
+  "converter_defaults": {
+    "forceStandardSize": true,
+    "stripInlineStyles": true,
+    "dynamicConnector": true,
+    "normalizeCoordinates": true,
+    "processWidthIn": 2.2,
+    "processHeightIn": 0.394,
+    "decisionWidthIn": 2.13,
+    "decisionHeightIn": 0.47,
+    "startEndWidthIn": 1.26,
+    "startEndHeightIn": 0.394,
+    "fontSizePt": 8,
+    "pxPerInch": 96,
+    "verticalGapIn": 0.55,
+    "batchEditable": true,
+    "preset": "beauty"
+  },
+  "presets": {
+    "beauty": {
+      "label": "美观预设（推荐）",
+      "description": "同级等高、主列对中；流程统一一种宽度，长文可加宽",
+      "process_width_in": 2.2,
+      "process_height_in": 0.394,
+      "decision_width_in": 2.13,
+      "decision_height_in": 0.47,
+      "start_end_width_in": 1.26,
+      "start_end_height_in": 0.394,
+      "vertical_gap_in": 0.55,
+      "font_size_pt": 8,
+      "text_width_rule_mm": "W ≈ 汉字数 × 3.0 + 16",
+      "notes": [
+        "高锁 10mm，只调宽",
+        "判定略宽、略高于流程（菱形比例约 2:1）",
+        "≥13 字可 W=80mm 或两行 H=14mm",
+        "垂直间距 12–16mm，多列列距 18–24mm"
+      ]
+    },
+    "compact": {
+      "label": "紧凑预设",
+      "process_width_in": 1.85,
+      "process_height_in": 0.35,
+      "decision_width_in": 1.85,
+      "decision_height_in": 0.42,
+      "start_end_width_in": 1.05,
+      "start_end_height_in": 0.35,
+      "vertical_gap_in": 0.42,
+      "font_size_pt": 7.5
+    }
+  }
+}

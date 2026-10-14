@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net">
+  <diagram id="public-example" name="审核流程">
+    <mxGraphModel><root>
+      <mxCell id="0"/><mxCell id="1" parent="0"/>
+      <mxCell id="start" value="开始 / Start" style="ellipse;fillColor=#D7F1E5;strokeColor=#1F7652;fontSize=16" vertex="1" parent="1"><mxGeometry x="330" y="30" width="180" height="44" as="geometry"/></mxCell>
+      <mxCell id="receive" value="接收申请 / Receive" style="rounded=0;fillColor=#DFEAFE;strokeColor=#2758A5;fontSize=14" vertex="1" parent="1"><mxGeometry x="280" y="130" width="280" height="52" as="geometry"/></mxCell>
+      <mxCell id="check" value="检查材料 / Check" style="rounded=0;fillColor=#DFEAFE;strokeColor=#2758A5;fontSize=18" vertex="1" parent="1"><mxGeometry x="310" y="250" width="220" height="68" as="geometry"/></mxCell>
+      <mxCell id="decision" value="完整？ / Complete?" style="rhombus;fillColor=#EDE5FA;strokeColor=#7450A0;fontSize=14" vertex="1" parent="1"><mxGeometry x="300" y="400" width="240" height="100" as="geometry"/></mxCell>
+      <mxCell id="revise" value="补充材料 / Revise" style="rounded=0;fillColor=#FBE8CC;strokeColor=#91621F;fontSize=16" vertex="1" parent="1"><mxGeometry x="720" y="424" width="270" height="52" as="geometry"/></mxCell>
+      <mxCell id="approve" value="提交审核 / Review" style="rounded=0;fillColor=#DFEAFE;strokeColor=#2758A5;fontSize=15" vertex="1" parent="1"><mxGeometry x="270" y="600" width="300" height="44" as="geometry"/></mxCell>
+      <mxCell id="end" value="结束 / End" style="ellipse;fillColor=#D7F1E5;strokeColor=#1F7652;fontSize=18" vertex="1" parent="1"><mxGeometry x="320" y="760" width="200" height="54" as="geometry"/></mxCell>
+      <mxCell id="e1" edge="1" parent="1" source="start" target="receive"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="e2" edge="1" parent="1" source="receive" target="check"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="e3" edge="1" parent="1" source="check" target="decision"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="e4" value="否 / No" edge="1" parent="1" source="decision" target="revise"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="e5" value="是 / Yes" edge="1" parent="1" source="decision" target="approve"><mxGeometry relative="1" as="geometry"/></mxCell>
+      <mxCell id="e6" edge="1" parent="1" source="approve" target="end"><mxGeometry relative="1" as="geometry"/></mxCell>
+    </root></mxGraphModel>
+  </diagram>
+</mxfile>

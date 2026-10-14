@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "source": "input.drawio",
+  "styleProfile": "templates/user-style-profile.json",
+  "stencil": {
+    "path": "templates/MyFlowchartStencil.vssx",
+    "description": "自定义标准流程图模具（用户预先定制）"
+  },
+  "masterMapping": {
+    "startEnd": "开始/结束",
+    "process": "流程",
+    "decision": "判定",
+    "data": "流程",
+    "database": "流程",
+    "document": "流程",
+    "manual": "流程",
+    "preparation": "流程",
+    "terminator": "开始/结束",
+    "unknown": "流程",
+    "connector": "动态连接线"
+  },
+  "masters": [
+    "开始/结束",
+    "流程",
+    "判定",
+    "动态连接线"
+  ],
+  "options": {
+    "forceStandardSize": true,
+    "stripInlineStyles": true,
+    "dynamicConnector": true,
+    "normalizeCoordinates": true,
+    "processWidthIn": 2.2,
+    "processHeightIn": 0.394,
+    "decisionWidthIn": 2.13,
+    "decisionHeightIn": 0.47,
+    "startEndWidthIn": 1.26,
+    "startEndHeightIn": 0.394,
+    "fontSizePt": 8,
+    "pxPerInch": 96,
+    "verticalGapIn": 0.55,
+    "preset": "beauty"
+  },
+  "style": {
+    "lineColor": "#000000",
+    "lineWeightIn": 0.006944,
+    "fillColor": "#FEFFFF",
+    "textSizeIn": 0.111111,
+    "textSizePt": 8,
+    "fontBinding": "Themed",
+    "asianFontBinding": "Themed",
+    "langId": "zh-CN",
+    "endArrow": 4,
+    "endArrowSize": 2
+  },
+  "theme": {
+    "name": "Office",
+    "schemeId": 60,
+    "latinFont": "Calibri",
+    "eastAsiaFont": "KaiTi_GB2312"
+  },
+  "coordinateTransform": {
+    "drawio": {
+      "origin": "top-left",
+      "yAxis": "down",
+      "unit": "px"
+    },
+    "visio": {
+      "origin": "bottom-left",
+      "yAxis": "up",
+      "unit": "in"
+    },
+    "formula": "Visio_Y = (PageHeightPx - (Drawio_Y + Shape_Height / 2)) * Scale"
+  },
+  "presets": {
+    "beauty": {
+      "label": "美观预设（推荐）",
+      "description": "同级等高、主列对中；流程统一一种宽度，长文可加宽",
+      "process_width_in": 2.2,
+      "process_height_in": 0.394,
+      "decision_width_in": 2.13,
+      "decision_height_in": 0.47,
+      "start_end_width_in": 1.26,
+      "start_end_height_in": 0.394,
+      "vertical_gap_in": 0.55,
+      "font_size_pt": 8,
+      "text_width_rule_mm": "W ≈ 汉字数 × 3.0 + 16",
+      "notes": [
+        "高锁 10mm，只调宽",
+        "判定略宽、略高于流程（菱形比例约 2:1）",
+        "≥13 字可 W=80mm 或两行 H=14mm",
+        "垂直间距 12–16mm，多列列距 18–24mm"
+      ]
+    },
+    "compact": {
+      "label": "紧凑预设",
+      "process_width_in": 1.85,
+      "process_height_in": 0.35,
+      "decision_width_in": 1.85,
+      "decision_height_in": 0.42,
+      "start_end_width_in": 1.05,
+      "start_end_height_in": 0.35,
+      "vertical_gap_in": 0.42,
+      "font_size_pt": 7.5
+    }
+  }
+}

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Draw.io → Visio 标准化转换器</title>
+  <meta name="description" content="本地转换 Draw.io 流程图为可编辑 Visio，统一尺寸与字号，并逐项报告兼容性问题" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='3' width='8' height='6' rx='1.5' fill='none' stroke='%233d8bff' stroke-width='1.8'/%3E%3Crect x='14' y='3' width='8' height='6' rx='1.5' fill='none' stroke='%233d8bff' stroke-width='1.8'/%3E%3Crect x='8' y='15' width='8' height='6' rx='1.5' fill='none' stroke='%233d8bff' stroke-width='1.8'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<div class="app">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="3" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="14" y="3" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <rect x="8" y="15" width="8" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M6 9v2.5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V9" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M12 13.5V15" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <strong>Drawio2Visio</strong>
+          <span>转换器 · 将既有 Draw.io 转为可编辑 Visio</span>
+        </div>
+      </div>
+
+      <div class="pipeline" id="pipeline" aria-label="转换流水线">
+        <div class="pipe-step" data-step="parse">
+          <span class="pipe-dot"></span>
+          <span class="pipe-label">解析</span>
+        </div>
+        <div class="pipe-line"></div>
+        <div class="pipe-step" data-step="map">
+          <span class="pipe-dot"></span>
+          <span class="pipe-label">映射</span>
+        </div>
+        <div class="pipe-line"></div>
+        <div class="pipe-step" data-step="normalize">
+          <span class="pipe-dot"></span>
+          <span class="pipe-label">标准化</span>
+        </div>
+        <div class="pipe-line"></div>
+        <div class="pipe-step" data-step="export">
+          <span class="pipe-dot"></span>
+          <span class="pipe-label">导出</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <button class="btn ghost" id="btn-load-sample" type="button">载入示例</button>
+        <button class="btn primary" id="btn-export" type="button" disabled>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          导出 Visio
+        </button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="workspace">
+      <!-- Left: source & config -->
+      <aside class="panel left-panel">
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>源文件</h2>
+            <span class="badge" id="file-status">未加载</span>
+          </div>
+
+          <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="上传 drawio 文件">
+            <input type="file" id="file-input" accept=".drawio,.xml" hidden />
+            <div class="dropzone-inner">
+              <div class="drop-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 16V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <p class="drop-title">拖入 .drawio 文件</p>
+              <p class="drop-sub">或点击选择文件 · 支持压缩流与明文 XML</p>
+            </div>
+          </div>
+
+          <div class="file-meta" id="file-meta" hidden>
+            <div class="meta-row"><span>文件名</span><strong id="meta-name">—</strong></div>
+            <div class="meta-row"><span>图形节点</span><strong id="meta-nodes">0</strong></div>
+            <div class="meta-row"><span>连接边</span><strong id="meta-edges">0</strong></div>
+            <div class="meta-row"><span>页面</span><strong id="meta-pages">1</strong></div>
+          </div>
+          <label class="field" id="page-picker" hidden>
+            <span>选择转换页</span>
+            <select id="page-select"><option value="1">1</option></select>
+          </label>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>模具映射</h2>
+            <button class="btn tiny ghost" id="btn-reset-map" type="button">重置</button>
+          </div>
+          <p class="panel-hint">查看内置母版对应关系。数据、数据库等复杂形状目前会简化为流程矩形。</p>
+          <details><summary>查看内置母版对应关系</summary>
+          <div class="map-list" id="map-list">
+            <!-- filled by JS -->
+          </div>
+          </details>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>样式标准化</h2>
+          </div>
+          <div class="toggle-list">
+            <label class="toggle">
+              <input type="checkbox" id="opt-force-size" checked />
+              <span class="toggle-ui"></span>
+              <span class="toggle-text">
+                <strong>强制统一尺寸</strong>
+                <small>按下方参数批量套用，消除手动拉伸误差</small>
+              </span>
+            </label>
+            <details><summary>固定输出设置</summary>
+            <label class="toggle">
+              <input type="checkbox" id="opt-strip-styles" checked disabled />
+              <span class="toggle-ui"></span>
+              <span class="toggle-text">
+                <strong>剥离内联样式</strong>
+                <small>采用黑白样式、主题字体与下方指定字号</small>
+              </span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="opt-dynamic-conn" checked disabled />
+              <span class="toggle-ui"></span>
+              <span class="toggle-text">
+                <strong>动态连接线</strong>
+                <small>生成带吸附特性的原生 Dynamic Connector</small>
+              </span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="opt-scale-units" checked disabled />
+              <span class="toggle-ui"></span>
+              <span class="toggle-text">
+                <strong>坐标系归一化</strong>
+                <small>Draw.io 像素 → Visio 英寸（原点左下）</small>
+              </span>
+            </label>
+            </details>
+          </div>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>批量尺寸</h2>
+            <button class="btn tiny ghost" id="btn-reset-sizes" type="button">恢复习惯值</button>
+          </div>
+          <p class="panel-hint">一处改参数，全部同类框同时生效。流程框统一一种规格，个别差异可到 Visio 再微调。</p>
+          <label class="field"><span>尺寸预设</span><select id="preset-select"><option value="beauty">标准 · 8 pt</option><option value="compact">紧凑 · 7.5 pt</option></select></label>
+
+          <div class="size-group">
+            <div class="size-group-title"><i class="swatch process"></i>流程框</div>
+            <div class="size-grid">
+              <label class="field">
+                <span>宽度</span>
+                <input type="number" id="size-process-w" value="2.20" step="0.05" min="0.2" max="8" />
+                <em>in</em>
+              </label>
+              <label class="field">
+                <span>高度</span>
+                <input type="number" id="size-process-h" value="0.394" step="0.01" min="0.1" max="3" />
+                <em>in</em>
+              </label>
+            </div>
+          </div>
+
+          <div class="size-group">
+            <div class="size-group-title"><i class="swatch decision"></i>判定框</div>
+            <div class="size-grid">
+              <label class="field">
+                <span>宽度</span>
+                <input type="number" id="size-decision-w" value="2.13" step="0.05" min="0.3" max="8" />
+                <em>in</em>
+              </label>
+              <label class="field">
+                <span>高度</span>
+                <input type="number" id="size-decision-h" value="0.47" step="0.01" min="0.1" max="3" />
+                <em>in</em>
+              </label>
+            </div>
+          </div>
+
+          <div class="size-group">
+            <div class="size-group-title"><i class="swatch start"></i>起止框</div>
+            <div class="size-grid">
+              <label class="field">
+                <span>宽度</span>
+                <input type="number" id="size-start-w" value="1.26" step="0.05" min="0.2" max="6" />
+                <em>in</em>
+              </label>
+              <label class="field">
+                <span>高度</span>
+                <input type="number" id="size-start-h" value="0.394" step="0.01" min="0.1" max="2" />
+                <em>in</em>
+              </label>
+            </div>
+          </div>
+
+          <div class="size-group">
+            <div class="size-group-title"><i class="swatch other"></i>布局</div>
+            <div class="size-grid">
+              <label class="field">
+                <span>布局</span>
+                <small>保留原节点位置，导出页随内容适配</small>
+              </label>
+              <label class="field">
+                <span>字号</span>
+                <input type="number" id="size-font" value="8" step="0.5" min="4" max="24" />
+                <em>pt</em>
+              </label>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+      <!-- Center: preview -->
+      <section class="panel canvas-panel">
+        <div class="canvas-toolbar">
+          <div class="seg" role="tablist">
+            <button class="seg-btn active" data-view="preview" type="button">输出预览</button>
+            <button class="seg-btn" data-view="mapping" type="button">映射结果</button>
+            <button class="seg-btn" data-view="xml" type="button">源 XML</button>
+          </div>
+          <div class="canvas-meta">
+            <span class="legend"><i class="dot start"></i>起止</span>
+            <span class="legend"><i class="dot process"></i>流程</span>
+            <span class="legend"><i class="dot decision"></i>判定</span>
+            <span class="legend"><i class="dot other"></i>其他</span>
+          </div>
+        </div>
+
+        <div class="canvas-stage" id="canvas-stage">
+          <div class="view view-preview active" id="view-preview">
+            <svg id="flow-svg" class="flow-svg" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="empty-state" id="empty-state">
+              <div class="empty-graphic" aria-hidden="true">
+                <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+                  <rect x="8" y="12" width="40" height="22" rx="11" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+                  <rect x="68" y="12" width="44" height="22" rx="4" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+                  <path d="M48 23h20" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+                  <path d="M90 34v12H50V34" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+                  <path d="M50 46 36 58" stroke="currentColor" stroke-width="1.5" opacity=".35"/>
+                  <rect x="12" y="52" width="36" height="22" rx="4" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+                  <rect x="72" y="52" width="36" height="22" rx="4" transform="rotate(0)" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
+                  <path d="M72 63h20" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+                </svg>
+              </div>
+              <h3>等待 Draw.io 文件</h3>
+              <p>请在 Draw.io 中完成绘图后导出/保存为 .drawio。载入后自动识别形状、批量套用尺寸与母版，并导出可编辑 Visio。</p>
+            </div>
+          </div>
+
+          <div class="view view-mapping" id="view-mapping">
+            <div class="map-table-wrap">
+              <table class="map-table" id="map-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>文本</th>
+                    <th>识别类型</th>
+                    <th>目标母版</th>
+                    <th>尺寸 (in)</th>
+                    <th>状态</th>
+                  </tr>
+                </thead>
+                <tbody id="map-table-body">
+                  <tr class="placeholder"><td colspan="6">尚未解析图形</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="view view-xml" id="view-xml">
+            <pre class="xml-view" id="xml-view">/* 载入 .drawio 后在此显示解析出的结构化 XML */</pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right: inspect & export -->
+      <aside class="panel right-panel">
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>转换摘要</h2>
+          </div>
+          <div class="stat-grid">
+            <div class="stat">
+              <span class="stat-label">已映射形状</span>
+              <strong class="stat-value" id="stat-shapes">0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">连接线</span>
+              <strong class="stat-value" id="stat-edges">0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">母版绑定</span>
+              <strong class="stat-value" id="stat-masters">0</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">输出样式</span>
+              <strong class="stat-value" id="stat-styles">—</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title"><h2>转换检查</h2><span class="badge" id="compatibility-status">等待文件</span></div>
+          <p class="panel-hint" id="compatibility-note">载入后检查形状简化、遗漏连线、文字溢出与重叠。</p>
+          <ul id="compatibility-list" class="compatibility-list" aria-live="polite"></ul>
+          <label class="toggle"><input type="checkbox" id="opt-strict" /><span class="toggle-ui"></span><span class="toggle-text"><strong>严格模式</strong><small>存在待检查项时禁止导出</small></span></label>
+          <button class="btn ghost" id="btn-report" type="button" disabled>下载检查报告</button>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>输出格式</h2>
+          </div>
+          <div class="format-list">
+            <label class="format-card selected">
+              <input type="radio" name="export-format" value="vsdx" checked />
+              <div class="format-body">
+                <strong>.vsdx</strong>
+                <span>Visio Open XML 文档（含母版）</span>
+              </div>
+            </label>
+            <label class="format-card">
+              <input type="radio" name="export-format" value="vdx" />
+              <div class="format-body">
+                <strong>.vdx</strong>
+                <span>Visio XML Drawing（兼容旧版）</span>
+              </div>
+            </label>
+            <label class="format-card">
+              <input type="radio" name="export-format" value="svg" />
+              <div class="format-body">
+                <strong>.svg</strong>
+                <span>Visio 可读 SVG（foreignObject 修复）</span>
+              </div>
+            </label>
+            <label class="format-card">
+              <input type="radio" name="export-format" value="config" />
+              <div class="format-body">
+                <strong>config.json</strong>
+                <span>仅导出映射配置（供 Python/COM）</span>
+              </div>
+            </label>
+            <label class="format-card">
+              <input type="radio" name="export-format" value="python" />
+              <div class="format-body">
+                <strong>Python 工程</strong>
+                <span>生成 PRD 结构的 COM 转换脚手架</span>
+              </div>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel-block grow">
+          <div class="panel-title">
+            <h2>母版清单</h2>
+          </div>
+          <ul class="master-list" id="master-list">
+            <li class="muted">载入文件后显示将写入的母版</li>
+          </ul>
+        </section>
+
+        <section class="panel-block">
+          <div class="panel-title">
+            <h2>日志</h2>
+            <button class="btn tiny ghost" id="btn-clear-log" type="button">清空</button>
+          </div>
+          <div class="log" id="log" aria-live="polite"></div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast" hidden></div>
+
+  <script src="js/zip.js?v=20260926-1925"></script>
+  <script src="js/vsdx-skeleton.js?v=20260926-1925"></script>
+  <script src="js/drawio-parser.js?v=20260926-1925"></script>
+  <script src="js/mapper.js?v=20260926-1925"></script>
+  <script src="js/vsdx-builder.js?v=20260926-1925"></script>
+  <script src="js/converter.js"></script>
+  <script src="js/app.js?v=20260926-1925"></script>
+</body>
+</html>

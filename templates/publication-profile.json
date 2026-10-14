@@ -1,0 +1,14 @@
+{
+  "label": "Publication flowchart: 56 mm process, 12 mm height, 9 pt text",
+  "presets": {
+    "paper": {
+      "processWidth": 2.2047,
+      "processHeight": 0.4724,
+      "decisionWidth": 2.3622,
+      "decisionHeight": 0.6299,
+      "startEndWidth": 1.378,
+      "startEndHeight": 0.4724,
+      "fontSizePt": 9
+    }
+  }
+}

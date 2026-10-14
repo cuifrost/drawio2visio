@@ -1,0 +1,28 @@
+{
+  "name": "drawio2visio",
+  "version": "0.1.0",
+  "description": "Draw.io → Visio 标准化转换器：解析 .drawio → 母版映射 → 尺寸归一化 → 可编辑 .vsdx",
+  "private": true,
+  "license": "MIT",
+  "author": "cuifrost",
+  "repository": { "type": "git", "url": "git+https://github.com/cuifrost/drawio2visio.git" },
+  "bugs": { "url": "https://github.com/cuifrost/drawio2visio/issues" },
+  "homepage": "https://github.com/cuifrost/drawio2visio#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.9.8"
+  },
+  "scripts": {
+    "test": "node --test tests && python3 -m unittest discover -s tests -v",
+    "convert": "node scripts/convert.js",
+    "convert:ai": "python3 scripts/ai_convert.py",
+    "check": "python3 scripts/check_vsdx.py",
+    "compare": "python3 scripts/compare_vsdx.py",
+    "serve": "python3 -m http.server 8765 --bind 127.0.0.1",
+    "smoke": "python3 scripts/smoke.py",
+    "docs:figures": "node scripts/render_examples.js",
+    "build:skeleton": "node scripts/build_skeleton.js"
+  }
+}
